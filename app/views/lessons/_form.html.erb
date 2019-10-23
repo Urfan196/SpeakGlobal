@@ -1,0 +1,12 @@
+<%= form_for @lesson do |f| %>
+    You: <%= @student.first_name %><br>
+    <%= f.hidden_field :student_id, value: @student.id %>
+    Invited Person: <%= @teacher.first_name %><br>
+    <%= f.hidden_field :teacher_id, value: @teacher.id %>
+    <%= f.label :language_id %>
+    <%= f.collection_select(:language_id, @teacher.languages.all, :id, :name) %><br>
+    <%= f.label :date %>
+    <%= f.datetime_select :date, ampm: true, start_year: Time.now.year, end_year: Time.now.year + 1 , prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}%><br>
+    
+    <%= f.submit button_text%>
+ <% end %>

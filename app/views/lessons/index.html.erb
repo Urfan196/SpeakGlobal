@@ -1,0 +1,7 @@
+<h1>All my lessons</h1>
+<% @lessons.all.each do |lesson| %>
+    Date: <%= lesson.date %><br>
+    Language: <%= lesson.language.name %><br>
+    Teacher: <%= link_to lesson.teacher.first_name, lesson.teacher %><br>
+    Student: <%= lesson.student.first_name %>
+<% end %>
