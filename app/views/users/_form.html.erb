@@ -1,0 +1,16 @@
+ 
+<%= form_for @user do |f| %>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %><br>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %><br>
+    <%= f.label :birthday %>
+    <%= f.date_select :birthday, start_year: 1915, end_year: Date.current.year, order: [:month, :day, :year] %><br>
+    <%= f.label :email %>
+    <%= f.text_field :email %><br>
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %><br>
+    <%= f.submit button_text%>
+ <% end %>
