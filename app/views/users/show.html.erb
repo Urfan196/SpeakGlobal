@@ -1,4 +1,5 @@
 <% if logged_in? && @user !=current_user %>
+
     <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
     <ul>
     <% @user.fluencies.each do |fluency| %>
@@ -6,10 +7,12 @@
         <%= fluency.experience.level %></li>
     <% end %>
     </ul>
-    <%= form_tag new_lesson_path, method: 'get' do %>
-        <%= hidden_field_tag :student_id, current_user.id %>
-        <%= hidden_field_tag :teacher_id, @user.id %>
-        <%= submit_tag "Invite to Language Lesson" %>
+    <% if @user.languages.count > 0 %>
+        <%= form_tag new_lesson_path, method: 'get' do %>
+            <%= hidden_field_tag :student_id, current_user.id %>
+            <%= hidden_field_tag :teacher_id, @user.id %>
+            <%= submit_tag "Invite to Language Lesson" %>
+        <% end %>
     <% end %>
 
 <% elsif logged_in? && @user ==current_user %>
@@ -26,11 +29,17 @@
         <%= hidden_field_tag :student_id, current_user.id %>
         <%= submit_tag "All my lesson" %>
     <% end %>
-
-    <%= form_tag new_fluency_path, method: 'get' do %>
-        <%= hidden_field_tag :user_id, current_user.id %>
-        <%= submit_tag "Add language" %>
-    <% end %>
     
+    <% if @user.unlearned_languages.count >= 1 %>
+        <%= form_tag new_fluency_path, method: 'get' do %>
+            <%= hidden_field_tag :user_id, current_user.id %>
+            <%= submit_tag "Add language" %>
+        <% end %>
+    <% end %>
+
+    <%= form_tag fluencies_path, method: 'get' do %>
+        <%= hidden_field_tag :user_id, current_user.id %>
+        <%= submit_tag "Edit language" %>
+    <% end %>
 
 <% end %>

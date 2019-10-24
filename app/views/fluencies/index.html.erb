@@ -1,0 +1,3 @@
+<% @user.fluencies.each do |fluency| %>
+    <%= link_to "#{fluency.language.name} #{fluency.experience.level}", edit_fluency_path(fluency.id) %><br>
+<% end %>

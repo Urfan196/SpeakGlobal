@@ -1,9 +1,15 @@
 class LessonsController < ApplicationController
     before_action :find_lesson, only: [:show, :edit, :update, :destroy]
+    before_action :authorized
 
     def index
-        @student = User.find(params[:student_id])
-        @lessons = @student.teacher_lesson.all
+        if params[:student_id].to_i == current_user.id
+            @student = User.find(params[:student_id])
+            @lessons = @student.teacher_lesson.all
+        else
+            @student = User.find(current_user.id)
+            @lessons = @student.teacher_lesson.all
+        end
     end
 
     def show

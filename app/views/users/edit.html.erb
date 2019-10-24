@@ -1,3 +1,6 @@
- <h1> Hey <%=@user.first_name%>, let's update your profile. </h1>
- <%= render partial: 'form', locals: {button_text: "Update Account"}%>
- <%= button_to "Delete User", @user, method: :delete %>
+
+ <% if logged_in? && @user ==current_user %>
+    <h1> Hey <%=@user.first_name%>, let's update your profile. </h1>
+    <%= render partial: 'form', locals: {button_text: "Update Account"}%>
+    <%= button_to "Delete User", @user, method: :delete %>
+ <% end %>
