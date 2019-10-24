@@ -1,7 +1,0 @@
-<%= form_for @fluency do |f| %>
-    <%= @user.first_name %><br>
-    <%= f.hidden_field :user_id, value: @user.id %>
-    <%= f.collection_select :language_id, Language.all, :id, :name %><br>
-    <%= f.collection_select :experience_id, Experience.all, :id, :level %><br>
-    <%= f.submit button_text%>
- <% end %>

@@ -5,7 +5,7 @@
     <%= f.label :last_name %>
     <%= f.text_field :last_name %><br>
     <%= f.label :birthday %>
-    <%= f.date_select :birthday, start_year: 1915, end_year: Date.current.year, order: [:month, :day, :year] %><br>
+    <%= f.date_select :birthday, end_year: Date.current.year - 14, start_year: 1915 , order: [:month, :day, :year ]%><br>
     <%= f.label :email %>
     <%= f.text_field :email %><br>
     <%= f.label :password %>

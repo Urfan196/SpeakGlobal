@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
-    before_action :find_user, only: [:show, :edit, :update, :destroy]
+    before_action :find_user, only: [:show, :update, :destroy]
     before_action :authorized, except: [:new, :create, :show]
 
     def index
-        @users = User.all
+        all_users = User.all
+        @users = all_users.reject {|user| user == current_user }
     end
 
     def show
@@ -21,12 +22,18 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to @user
         else
-            flash[:errors] = "Email must be present. Password must match."
-            redirect_to signup_path
+            flash[:errors] = "You are wrong"
+            render :new
         end
     end
 
     def edit
+       
+        if params[:id].to_i == current_user.id
+            find_user
+        else
+            redirect_to edit_user_path(current_user)
+        end
     end
 
     def update
@@ -38,7 +45,7 @@ class UsersController < ApplicationController
             redirect_to @user
         else
             flash[:errors] = "hello you're wrong"
-            redirect_to signup_path
+            render :edit
         end
     end
 

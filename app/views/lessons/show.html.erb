@@ -1,0 +1,5 @@
+<h1>Lesson info</h1>
+Date: <%= @lesson.date %><br>
+Language: <%= @lesson.language.name %><br>
+Teacher: <%= link_to @lesson.teacher.first_name, @lesson.teacher %><br>
+Student: <%= @lesson.student.first_name %>
