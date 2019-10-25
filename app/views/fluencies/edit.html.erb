@@ -3,6 +3,6 @@
     <%= f.hidden_field :user_id, value: @user.id %>
     <%= @fluency.language.name %><br>
     <%= f.collection_select :experience_id, Experience.all, :id, :level %><br>
-    <%= f.submit "Edit" %>
+    <%= f.submit "Update" %>
  <% end %>
  <%= button_to "Delete Language", @fluency, method: :delete %>
