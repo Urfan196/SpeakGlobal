@@ -1,10 +1,16 @@
-<h1>Welcome to Speak Global</h1>
-<% if !logged_in? %>
-  <%= button_to "Sign Up", "signup", method: :get%><br>
-  <%= button_to "Log In", "login", method: :get%>
-<% end %>
-
+<center>
 <img class="mfp-img" src="http://www.lanoticia.com/wp-content/uploads/2018/05/dreamstime_s_55150268.jpg" style="max-height: 326px;">
-<h4> Have you ever wanted to learn another language without paying an arm and a leg?</h4>
-<h4> With Speak Global, make those dreams come true!</h4>
-<h4> Connect with users around the world </h4>
+</center>
+    <div class="container d-flex h-100 align-items-center">
+      <div class="mx-auto text-center">
+        <h1 class="mx-auto my-0 text-uppercase"><br>Welcome to Speak Global</h1>
+      <% if !logged_in? %>
+        <h5 class="text-white-50 mx-auto mt-2 mb-5"><br>Have you ever wanted to learn another language without paying an arm and a leg? </h5>
+        <h5 class="text-white-50 mx-auto mt-2 mb-5">With Speak Global, make those dreams come true!</h5>
+        <h5 class="text-white-50 mx-auto mt-2 mb-5">Connect with users around the world, FOR FREE!!! </h5>
+      
+        <%= button_to "Log In", "login", method: :get, class: "btn btn-primary"%><br>
+        <%= button_to "SignUp", "signup", method: :get, class: "btn btn-primary"%>
+      <% end %>
+      </div>
+    </div>

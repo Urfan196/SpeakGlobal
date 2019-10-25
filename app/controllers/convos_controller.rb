@@ -12,6 +12,7 @@ class ConvosController < ApplicationController
   end
 
   def create
+    byebug
     @convo = Convo.new(convo_params)
     if @convo.save
       @lesson= Lesson.find(params[:convo][:lesson_id])

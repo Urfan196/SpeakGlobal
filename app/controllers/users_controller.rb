@@ -21,7 +21,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to @user
         else
-            flash[:errors] = "You are wrong"
+            flash[:errors] = @user.errors.full_messages
             render :new
         end
     end
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to @user
         else
-            flash[:errors] = "hello you're wrong"
+            flash[:errors] = @user.errors.full_messages
             render :edit
         end
     end
