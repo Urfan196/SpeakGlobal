@@ -1,9 +1,16 @@
 <h1>Lesson info</h1>
 Date: <%= @lesson.date %><br>
 Language: <%= @lesson.language.name %><br>
-Classmate: <%= link_to @lesson.teacher.first_name, @lesson.teacher %><br>
-Me: <%= @lesson.student.first_name %>
+<% if @lesson.teacher == current_user %>
+Me: <%= @lesson.teacher.first_name %><br>
+Classmate: <%= link_to @lesson.student.first_name, @lesson.student %>
+<% else %>
+Me: <%= @lesson.student.first_name %><br>
+Classmate: <%= link_to @lesson.teacher.first_name, @lesson.teacher%>
+<% end %>
 <%= form_tag convos_path, method: 'get' do %>
   <%= hidden_field_tag :lesson_id, @lesson.id %>
   <%= submit_tag "Message" %>
 <% end %>
+
+

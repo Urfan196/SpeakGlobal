@@ -18,8 +18,15 @@ class LessonsController < ApplicationController
     end
 
     def create
-        Lesson.create(lesson_params)
-        redirect_to current_user
+        lesson = Lesson.create(lesson_params)
+        if lesson.valid?
+            redirect_to current_user 
+        else
+            @lesson = Lesson.new
+            @student = User.find(params[:lesson][:student_id])
+            @teacher = User.find(params[:lesson][:teacher_id])
+            render :new
+        end
     end
 
     def edit
