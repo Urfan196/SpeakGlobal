@@ -2,11 +2,23 @@
 <% if logged_in? && @student == current_user %>
     <h1>All my lessons</h1>
     <% i = 0 %>
-    <% @lessons.all.each do |lesson| %>
-        <h3><%= link_to "Lesson #{i += 1}", lesson_path(lesson)%> </h3>
-        Date: <%= lesson.date %><br>
-        Language: <%= lesson.language.name %><br>
-        Teacher: <%= link_to lesson.teacher.first_name, lesson.teacher %><br>
-        Student: <%= lesson.student.first_name %>
+    <% if @student_l.count > 0 %>
+        <h3> Lessons you initiated </h3>
+        <% @student_l.all.each do |lesson| %>
+            <p><%= link_to "Lesson #{i += 1}", lesson_path(lesson)%> </p>
+            Date: <%= lesson.date %><br>
+            Language: <%= lesson.language.name %><br>
+            classmate: <%= link_to lesson.teacher.first_name, lesson.teacher %><br>
+        <% end %>
+    <% end %>
+    <% if @teacher_l.count > 0 %>
+        <h4> Lessons you were invited to </h4>
+        <% @teacher_l.all.each do |lesson| %>
+            <%= link_to "Lesson #{i += 1}", lesson_path(lesson)%> <br>
+            Date: <%= lesson.date %><br>
+            Language: <%= lesson.language.name %><br>
+            classmate: <%= link_to lesson.student.first_name, lesson.student %>
+            <%= button_to "Decline Lesson", lesson_path(lesson), method: :delete %>
+        <% end %>
     <% end %>
 <% end %>

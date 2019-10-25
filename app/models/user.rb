@@ -48,6 +48,33 @@ class User < ApplicationRecord
       !(@user_lang_ids.include?(language.id))
     end
   end
+
+  def student_lessons
+    Lesson.find_by(student_id: self.id)
+  end
+
+  def teacher_lessons
+    Lesson.find_by(teacher_id: self.id)
+  end
+
+  # def self.search(search_params)
+  #   if search_params
+      
+  #     language = Language.find_by(name: search_params)
+  #     fluency = Fluency.find_by(language_id: language.id)
+  #     if fluency
+  #       fluency.each do |f|
+  #         user_id = f.user_id
+  #         user = User.find_by(id: user_id)
+  #         self.where(name: user.name)
+  #       end
+  #     else
+  #       all_users = User.all
+  #     end
+  #   else
+  #     all_users = User.all
+  #   end
+  # end
     
    
 end

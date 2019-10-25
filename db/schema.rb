@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_22_181739) do
+ActiveRecord::Schema.define(version: 2019_10_24_204343) do
+
+  create_table "convos", force: :cascade do |t|
+    t.text "message"
+    t.integer "lesson_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "experiences", force: :cascade do |t|
     t.string "level"
