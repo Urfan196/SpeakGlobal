@@ -20,7 +20,7 @@ class LessonsController < ApplicationController
     def create
         lesson = Lesson.create(lesson_params)
         if lesson.valid?
-            redirect_to current_user 
+            redirect_to  lessons_path
         else
             @lesson = Lesson.new
             @student = User.find(params[:lesson][:student_id])
@@ -30,9 +30,13 @@ class LessonsController < ApplicationController
     end
 
     def edit
+        @student = User.find(@lesson.student_id)
+        @teacher = User.find(@lesson.teacher_id)
     end
 
     def update
+        @lesson.update(lesson_params)
+        redirect_to lessons_path
     end
 
     def destroy
