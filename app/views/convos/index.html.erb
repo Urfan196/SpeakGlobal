@@ -1,0 +1,20 @@
+
+<% @convos.each do |convo| %>
+  <% lesson = Lesson.find(convo[:lesson_id]) %>
+    <% if lesson.teacher_id == current_user.id || lesson.student_id == current_user.id %>
+      <% user = User.find(current_user.id) %>
+      <%= user.first_name %>
+    <% elsif lesson.teacher_id != current_user.id %>
+      <% user = User.find(lesson.teacher_id) %>
+      <%= user.first_name %>
+    <% elsif lesson.student_id != current_user.id %>
+      <% user = User.find(lesson.student_id) %>
+      <%= user.first_name %>
+    <% end %>
+  
+  <%= convo.message %><br>
+<% end %>
+<%= form_tag new_convo_path, method: 'get' do %>
+  <%= hidden_field_tag :lesson_id, @lesson.id %>
+  <%= submit_tag "Send Message" %>
+<% end %>

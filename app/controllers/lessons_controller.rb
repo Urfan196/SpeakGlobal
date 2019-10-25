@@ -3,13 +3,9 @@ class LessonsController < ApplicationController
     before_action :authorized
 
     def index
-        if params[:student_id].to_i == current_user.id
-            @student = User.find(params[:student_id])
-            @lessons = @student.teacher_lesson.all
-        else
-            @student = User.find(current_user.id)
-            @lessons = @student.teacher_lesson.all
-        end
+        @student = User.find(current_user.id)
+        @student_l = Lesson.where(student_id: current_user.id)
+        @teacher_l = Lesson.where(teacher_id: current_user.id)
     end
 
     def show
@@ -33,6 +29,8 @@ class LessonsController < ApplicationController
     end
 
     def destroy
+        @lesson.destroy
+        redirect_to lessons_path
     end
 
     private

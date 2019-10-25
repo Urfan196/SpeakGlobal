@@ -17,20 +17,20 @@
 
 <% elsif logged_in? && @user ==current_user %>
     <h1>welcome to your profile <%=@user.first_name%> </h1>
-    <h3> Your current Languages are: </h3>
-    <ul>
-    <% @user.fluencies.each do |fluency| %>
-        <li><%= fluency.language.name %>
-        <%= fluency.experience.level %></li>
+    <% if current_user.languages.count > 0 %>
+        <h3> Your current Languages are: </h3>
+        <ul>
+        <% @user.fluencies.each do |fluency| %>
+            <li><%= fluency.language.name %>
+            <%= fluency.experience.level %></li>
+        <% end %> 
+    <% else %> 
+    <h3> You currently have no languages. </h3>
     <% end %> 
     </ul>
     
-   <%= form_tag lessons_path, method: 'get' do %>
-        <%= hidden_field_tag :student_id, current_user.id %>
-        <%= submit_tag "All my lesson" %>
-    <% end %>
     
-    <% if @user.unlearned_languages.count >= 1 %>
+    <% if @user.unlearned_languages.count > 0 %>
         <%= form_tag new_fluency_path, method: 'get' do %>
             <%= hidden_field_tag :user_id, current_user.id %>
             <%= submit_tag "Add language" %>
