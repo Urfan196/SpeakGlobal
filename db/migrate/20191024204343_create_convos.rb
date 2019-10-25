@@ -3,6 +3,7 @@ class CreateConvos < ActiveRecord::Migration[6.0]
     create_table :convos do |t|
       t.text :message
       t.integer :lesson_id
+      t.integer :user_id
 
       t.timestamps
     end

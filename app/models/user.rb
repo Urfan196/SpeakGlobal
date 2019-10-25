@@ -11,6 +11,8 @@ class User < ApplicationRecord
     has_many :teacher_lesson, foreign_key: :student_id, class_name: "Lesson"
     has_many :teachers, through: :teacher_lesson, source: :teacher
 
+    has_many :convos
+
 
     
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP } 
@@ -56,25 +58,16 @@ class User < ApplicationRecord
   def teacher_lessons
     Lesson.find_by(teacher_id: self.id)
   end
-
-  # def self.search(search_params)
-  #   if search_params
-      
-  #     language = Language.find_by(name: search_params)
-  #     fluency = Fluency.find_by(language_id: language.id)
-  #     if fluency
-  #       fluency.each do |f|
-  #         user_id = f.user_id
-  #         user = User.find_by(id: user_id)
-  #         self.where(name: user.name)
-  #       end
-  #     else
-  #       all_users = User.all
-  #     end
-  #   else
-  #     all_users = User.all
-  #   end
-  # end
     
-   
+  def self.search(search_params)
+      if search_params
+      language = Language.find_by(name: search_params.titleize)
+      id_user = language.fluencies.map do |f|
+        f.user.id
+      end
+      self.where(id: id_user)
+        else
+        all_users = User.all
+      end
+    end
 end

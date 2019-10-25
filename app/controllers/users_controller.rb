@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :authorized, except: [:new, :create, :show]
 
     def index
-        all_users = User.all
+        all_users = User.search(params[:search])
         @users = all_users.reject {|user| user == current_user }
     end
 
@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 
     def create
         @user = User.new(user_params)
-
         if @user.valid?
             @user.save
             session[:user_id] = @user.id
@@ -57,7 +56,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :birthday, :password, :email)
+        params.require(:user).permit(:first_name, :last_name, :birthday, :password, :email, :search)
     end
 
     def find_user
